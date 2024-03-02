@@ -3,11 +3,11 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'docdel'
-        CONTAINER_NAME = 'docdel'
+        CONTAINER_NAME = 'docdel123'
     }
 
     stages {
-        stage('Build') {
+        stage('Maven Build') {
             steps {
                 // Your existing build and test steps
                 sh 'mvn clean install'

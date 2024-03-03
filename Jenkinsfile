@@ -1,17 +1,14 @@
 pipeline {
     agent {
-        docker {
+        dockerfile {
             // Use the Docker image that has Maven and Docker installed
             image 'maven:3.9.6-eclipse-temurin-21'
             // Mount Docker socket to allow Docker commands within the container
-           // args '-v /var/run/docker.sock:/var/run/docker.sock'
+            args '-v /temp/maven:/home/jenkins/.m2 -e MAVEN_CONFIG=/home/jenkins/.m2'
         }
     }
 
-    environment {
-        DOCKER_IMAGE = 'dockerdelete'
-        CONTAINER_NAME = 'dockerdelete-container'
-    }
+
 
     stages {
         stage('Maven Build') {
@@ -21,20 +18,7 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                // Build the Docker image using the Dockerfile
-                sh 'docker build -t ${DOCKER_IMAGE} .'
-            }
-        }
 
-        stage('Run Docker Container') {
-            steps {
-                // Run the Docker container
-                sh 'docker run -d --name ${CONTAINER_NAME} -p 6000:6000 ${DOCKER_IMAGE}'
-            }
-        }
-    }
 
     post {
         always {

@@ -1,15 +1,8 @@
 pipeline {
-    agent {
-        dockerfile {
-            // Use the Docker image that has Maven and Docker installed
-            label "docker"
-            // Mount Docker socket to allow Docker commands within the container
-            args '-v /temp/maven:/home/jenkins/.m2 -e MAVEN_CONFIG=/home/jenkins/.m2'
-        }
+    agent any
+    tools{
+        maven "3.9.6"
     }
-
-
-
     stages {
         stage('Maven Build') {
             steps {
@@ -18,12 +11,9 @@ pipeline {
             }
         }
     }
-
-
     post {
-        always {
+        always{
             cleanWs()
         }
     }
 }
-

@@ -4,7 +4,7 @@ pipeline {
             // Use the Docker image that has Maven and Docker installed
             image 'maven:3.9.6-eclipse-temurin-21'
             // Mount Docker socket to allow Docker commands within the container
-            args '-v /var/run/docker.sock:/var/run/docker.sock'
+           // args '-v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
 

@@ -1,6 +1,8 @@
 pipeline {
     agent any
-
+    tools{
+        maven 'maven 3_5_0'
+    }
     environment {
         DOCKER_IMAGE = 'docdel'
         CONTAINER_NAME = 'docdel123'

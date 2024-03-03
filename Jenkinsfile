@@ -13,8 +13,7 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-    }
-     stage('Build Docker Image') {
+        stage('Build Docker Image') {
                 steps {
                     script {
                         sh "docker build -t $DOCKER_IMAGE ."
@@ -28,6 +27,7 @@ pipeline {
                     }
                 }
             }
+        }
     post {
         always{
             cleanWs()

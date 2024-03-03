@@ -23,7 +23,7 @@ pipeline {
             stage('Deploy to Docker') {
                 steps {
                     script {
-                        sh "docker run -d -p 8080:8080 $DOCKER_IMAGE"
+                        sh "/usr/bin/docker run -d -p 8080:8080 $DOCKER_IMAGE"
                     }
                 }
             }

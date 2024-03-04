@@ -2,7 +2,7 @@ pipeline {
     agent {
         docker {
             image "maven:3.9.6-eclipse-temurin-17"
-            args '-v C:/ProgramData/Jenkins/.jenkins/workspace/tt:/workspace -w /workspace'
+            args '-v C:/Users/Fourat1/Desktop:/workspace -w /workspace'
         }
     }
     stages {

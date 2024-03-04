@@ -1,28 +1,25 @@
 pipeline {
-    agent none
-    environment{
-        JAVA_TOOL_OPTIONS ="-Duser.home=/var/maven"
+environment{
+JAVA_TOOL_OPTIONS ="-Duser.home=/home/jenkins"
+}
+    agent {
+        dockerfile {
+            args "-v /tmp/maven:/home/jenkins/.m2 MAVEN_CONFIG=/home/jenkins/.m2"
+
+        }
     }
     stages {
-        stage('Build') {
-            agent {
-                docker {
-                    image 'maven:3.9.6-eclipse-temurin-21'
-                    args '-v /tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=/var/maven/.m2'
+    stage('Build') {
+                steps {
+                    sh 'mvn -version'
+                    sh 'mvn clean install'
                 }
             }
-            steps {
-                script {
-                    def container = docker.image('maven:3.9.6-eclipse-temurin-21').run('-d -it -p 6000:6000', '--name my-container')
-                    sh 'docker cp target/dockerdelete.jar ${container.id}:/dockerdelete.jar'
-                    sh 'docker exec -d my-container java -jar /dockerdelete.jar'
-                }
-            }
-        }
     }
     post {
         always {
             cleanWs()
         }
     }
+
 }

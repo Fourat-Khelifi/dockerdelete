@@ -1,11 +1,14 @@
 pipeline {
     agent none
+    environment{
+        JAVA_TOOL_OPTIONS ="-Duser.home=/var/maven"
+    }
     stages {
         stage('Build') {
             agent {
                 docker {
                     image 'maven:3.9.6-eclipse-temurin-21'
-                    args '-v /tmp/maven:/home/jenkins/.m2 -e MAVEN_CONFIG=/home/jenkins/.m2'
+                    args '-v /tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=/var/maven/.m2'
                 }
             }
             steps {

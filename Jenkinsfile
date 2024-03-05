@@ -1,11 +1,6 @@
 pipeline {
-environment{
-
-}
     agent {
         dockerfile {
-
-
         }
     }
     stages {

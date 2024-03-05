@@ -1,18 +1,23 @@
 pipeline {
-
-    agent {
-        dockerfile {
-            args "-v /tmp/maven:/home/jenkins/.m2 -e MAVEN_CONFIG=/home/jenkins/.m2"
-
-        }
+    agent any
+    tools{
+        maven "3.9.6"
     }
+
     stages {
-    stage('Build') {
+    stage('Maven Build') {
                 steps {
                     sh 'mvn -version'
                     sh 'mvn clean install'
                 }
             }
+        stage('Docker Build'){
+            steps{
+                script{
+                    sh "docker build -t dockerdelete2 ."
+                }
+            }
+        }
     }
 
 

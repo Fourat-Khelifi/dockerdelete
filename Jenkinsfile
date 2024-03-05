@@ -18,6 +18,13 @@ pipeline {
                 }
             }
         }
+        stage('Docker Run'){
+            steps{
+                script{
+                    sh "docker run -d -p 8081:6000 dockerdelete2"
+                }
+            }
+        }
     }
 
 

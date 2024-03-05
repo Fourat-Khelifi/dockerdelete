@@ -1,6 +1,6 @@
 pipeline {
 environment{
-JAVA_TOOL_OPTIONS ="-D user.home=/home/jenkins"
+JAVA_TOOL_OPTIONS ="-Duser.home=/home/jenkins"
 }
     agent {
         dockerfile {
